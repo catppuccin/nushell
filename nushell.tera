@@ -5,7 +5,7 @@ whiskers:
     - flavor
   filename: "themes/catppuccin_{{ flavor.identifier }}.nu"
 ---
-let palette = {
+let theme = {
 {%- for identifier, color in flavor.colors %}
   {{ identifier }}: "#{{ color.hex }}"
 {%-endfor %}
@@ -85,7 +85,7 @@ $env.config.color_config = {
   shape_directory: $theme.blue
   shape_externalarg: $theme.text
   shape_filepath: $theme.blue
-  shape_flag: $theme.yellow{#
+  shape_flag: { fg: $theme.maroon attr: i }{#
 
   for instance, inputs to a command like `ls`. So `ls file1 *.txt`, both args are this
 
@@ -98,6 +98,8 @@ $env.config.color_config = {
   shape_int: $theme.peach{#
 
   command that is a binary, e.g. `ls`
+
+  we color keywords with mauve
 
   #}
   shape_internalcall: $theme.blue{#

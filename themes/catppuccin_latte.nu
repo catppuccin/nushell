@@ -86,7 +86,7 @@ $env.config.color_config = {
   shape_directory: $theme.blue
   shape_externalarg: $theme.text
   shape_filepath: $theme.blue
-  shape_flag: $theme.yellow
+  shape_flag: { fg: $theme.maroon attr: i }
   shape_globpattern: $theme.text
   shape_int: $theme.peach
   shape_internalcall: $theme.blue
