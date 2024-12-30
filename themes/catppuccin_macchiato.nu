@@ -89,7 +89,7 @@ $env.config.color_config = {
   shape_flag: { fg: $theme.maroon attr: i }
   shape_globpattern: $theme.text
   shape_int: $theme.peach
-  shape_internalcall: $theme.blue
+  shape_internalcall: $theme.green
   shape_list: $theme.overlay2
   shape_matching_brackets: { attr: u }
   shape_nothing: $theme.peach
@@ -114,9 +114,9 @@ $env.config.color_config = {
   shape_float: $theme.peach
   shape_binary: $theme.peach
   shape_datetime: $theme.peach
-  $env.config.highlight_resolved_externals = true
+  shape_external_resolved: $theme.green
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
-  glob: { fg: "#00ff00" bg: "#00ff00" }  shape_external_resolved: $theme.red
+  glob: { fg: "#00ff00" bg: "#00ff00" }
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }

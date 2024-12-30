@@ -99,10 +99,11 @@ $env.config.color_config = {
 
   command that is a binary, e.g. `ls`
 
-  we color keywords with mauve
+  "Internal" commands are those defined within nushell which are valid
+  e.g. `ls` is an internal command
 
   #}
-  shape_internalcall: $theme.blue{#
+  shape_internalcall: $theme.green{#
 
   syntax for lists, for example in [1, 2, 3, 4, 5] the square brackets and the comma use this syntax
 
@@ -290,19 +291,20 @@ $env.config.color_config = {
   #}
   shape_datetime: $theme.peach{#
 
-  Highlight invalid commands, works only if user sets 
-
+  Highlight valid external commands, works only if user sets 
+  $env.config.highlight_resolved_externals = true
   #}
-  $env.config.highlight_resolved_externals = true{#
+  shape_external_resolved: $theme.green{#
 
   Below highlights are not used.
 
   For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
   
   But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
+
   #}
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
-  glob: { fg: "#00ff00" bg: "#00ff00" }  shape_external_resolved: $theme.red
+  glob: { fg: "#00ff00" bg: "#00ff00" }
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
