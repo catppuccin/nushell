@@ -40,7 +40,7 @@ When I get the green light from maintainers of catppuccin, I will generate the p
 
 ## Usage
 
-Download the theme file you would like to use to your computer in the home directory, for example.
+Download the theme file from [the themes directory](./themes) you would like to use to your computer in the home directory, for example.
 
 Then, depending on which theme you would like to use, add the following to your config:
 
@@ -65,6 +65,12 @@ or
 ```nu
 source ~/catppuccin_mocha.nu
 ```
+
+## Building the themes
+
+Catppuccin for Helix uses [Whiskers](https://github.com/catppuccin/whiskers).
+
+Modify the themes by editing [helix.tera](./helix.tera), then run `whiskers helix.tera` (or `just build`).
 
 ## 💝 Thanks to
 
