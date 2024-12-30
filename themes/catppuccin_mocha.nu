@@ -34,9 +34,35 @@ $env.config.color_config = {
   empty: { bg: $theme.green fg: $theme.base }
   bool: $theme.peach
   int: $theme.peach
-  filesize: $theme.peach
+  filesize: {|fsize|
+      if $fsize < 10kb {
+          $theme.green
+      } else if $fsize < 1mb {
+          $theme.yellow
+      } else if $fsize < 10mb {
+          $theme.peach
+      } else if $fsize < 1gb {
+          $theme.maroon
+      } else if $fsize > 1gb {
+          $theme.red
+      }
+  }
   duration: $theme.text
-  date: $theme.peach
+  date: {|| (date now) - $in |
+    if $in < 1wk {
+        $theme.green
+    } else if $in < 4wk {
+        $theme.yellow
+    } else if $in < 12wk {
+        $theme.peach
+    } else if $in < 52wk {
+        $theme.maroon
+    } else if $in > 52wk {
+        $theme.red
+    }
+  }
+  background: $theme.base
+  foreground: $theme.text
   range: $theme.text
   float: $theme.text
   string: $theme.text
