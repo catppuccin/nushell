@@ -17,7 +17,8 @@
 
 ## Previews
 
-![image](https://github.com/user-attachments/assets/0e552d4b-aeae-46c7-9917-d0d75b636a8c)
+![image](https://github.com/user-attachments/assets/ff75e77b-ad5e-4d7a-9503-fbc6ee6212a5)
+
 
 When I get the green light from maintainers of catppuccin, I will generate the previews for this theme
 
