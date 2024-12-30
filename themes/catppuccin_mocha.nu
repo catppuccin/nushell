@@ -106,4 +106,10 @@ $env.config.color_config = {
   shape_float: $theme.peach
   shape_binary: $theme.peach
   shape_datetime: $theme.peach
+  shape_custom: { fg: "#ff0000" bg: "#ff0000" }
+  glob: { fg: "#00ff00" bg: "#00ff00" }
+  shape_external_resolved: { fg: "#0000ff" bg: "#0000ff" }
+  shape_literal: { fg: "#ffff00" bg: "#ffff00" }
+  shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
+  block: { fg: "#00ffff" bg: "#00ffff" }
 }
