@@ -257,10 +257,18 @@ $env.config.color_config = {
   commands which are not a part of nushell, or maybe they're not command at all
   e.g. `l` is not a command, but it gets this color
 
-  All commands get this color
+  All commands get this color, both valid and invalid
+
+  But there are certain theme keys which highlight only valid commands
+
+  This way, we can have the nice behaviour of highlighting incorrect commands with red and correct commands with green
+
+  - Highlighting correct external commands with green is done by the shape_external_resolved theme key
+  - Highlighting correct internal commands with green is done by the shape_internalcall theme key
+  - All other commands (so all invalid commands) will be then highlighted with this option
 
   #}
-  shape_external: $theme.blue{#
+  shape_external: $theme.red{#
 
   a range like 1..5
 

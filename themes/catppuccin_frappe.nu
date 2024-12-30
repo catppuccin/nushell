@@ -108,7 +108,7 @@ $env.config.color_config = {
   shape_bool: $theme.peach
   shape_signature: $theme.teal
   shape_vardecl: { fg: $theme.peach attr: i }
-  shape_external: $theme.blue
+  shape_external: $theme.red
   shape_range: $theme.sky
   shape_redirection: { fg: $theme.text attr: b }
   shape_float: $theme.peach
