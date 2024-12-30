@@ -278,9 +278,12 @@ $env.config.color_config = {
 
   #}
   shape_datetime: $theme.peach{#
+
+  Below highlights are not used.
+
+  For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
   
-  Below seem to not appear in the terminal
-  But we set it to red so it's easy to spot if we find it and fix it in the themes
+  But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
   #}
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
   glob: { fg: "#00ff00" bg: "#00ff00" }
