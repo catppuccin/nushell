@@ -257,6 +257,8 @@ $env.config.color_config = {
   commands which are not a part of nushell, or maybe they're not command at all
   e.g. `l` is not a command, but it gets this color
 
+  All commands get this color
+
   #}
   shape_external: $theme.blue{#
 
@@ -308,4 +310,11 @@ $env.config.color_config = {
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
-}
+}{#
+
+This is required to be able to highlight valid commands in green and use the shape_external_resolved option
+
+e.g. `lazygit` is a valid command, but it is external. It will get recognized as a correct command with this config
+
+#}
+$env.config.highlight_resolved_externals = true

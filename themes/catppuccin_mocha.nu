@@ -121,3 +121,4 @@ $env.config.color_config = {
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
 }
+$env.config.highlight_resolved_externals = true
