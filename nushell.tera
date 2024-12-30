@@ -299,14 +299,18 @@ $env.config.color_config = {
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
   glob: { fg: "#00ff00" bg: "#00ff00" }{#
 
-  Set the following config:
-  `$env.config.highlight_resolved_externals = true`
-
-  This will allow incorrect commands to be highlighted in a special color. For example, if `l` is not a command, it will get this color
+  Highlight invalid commands
 
   #}
   shape_external_resolved: $theme.red
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
-}
+}{#
+
+This config option is required to color invalid commands as red
+For example user might type `sl` which will be colored red, while `ls` will be colored green
+
+#}
+$env.config.highlight_resolved_externals = true
+
