@@ -129,6 +129,8 @@ $env.config.color_config = {
 
   symbols for the interpolated string, for example in $"greetings, ($name)" the following characters use this: $, first " and the last "
 
+  also the highlight for the `B` in e.g. 100B, `wk` in 10wk and other literals
+
   #}
   shape_string_interpolation: $theme.flamingo{#
 
@@ -277,13 +279,13 @@ $env.config.color_config = {
   #}
   shape_datetime: $theme.peach{#
   
-  Below cannot appear in the termina"
-  shape_custom: "#ff0000"
-  glob: "#ff0000"
-  shape_external_resolved: "#ff0000"
-  shape_literal: "#ff0000"
-  shape_glob_interpolation: "#ff0000"
-  block: "#ff0000"
-
+  Below seem to not appear in the terminal
+  But we set it to red so it's easy to spot if we find it and fix it in the themes
   #}
+  shape_custom: { fg: "#ff0000" bg: "#ff0000" }
+  glob: { fg: "#00ff00" bg: "#00ff00" }
+  shape_external_resolved: { fg: "#0000ff" bg: "#0000ff" }
+  shape_literal: { fg: "#ffff00" bg: "#ffff00" }
+  shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
+  block: { fg: "#00ffff" bg: "#00ffff" }
 }
