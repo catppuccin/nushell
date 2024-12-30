@@ -23,30 +23,38 @@ $env.config.color_config = {
   bool: $theme.peach
   int: $theme.peach
   filesize: {|fsize|
-      if $fsize < 10kb {
+      if $fsize < 1kb {
+          $theme.teal
+      } else if $fsize < 10kb {
           $theme.green
-      } else if $fsize < 1mb {
+      } else if $fsize < 100kb {
           $theme.yellow
       } else if $fsize < 10mb {
           $theme.peach
-      } else if $fsize < 1gb {
+      } else if $fsize < 100mb {
           $theme.maroon
-      } else if $fsize > 1gb {
+      } else if $fsize < 1gb {
           $theme.red
-      }
+      } else {
+		  $theme.mauve
+	  }
   }
   duration: $theme.text
   date: {|| (date now) - $in |
-    if $in < 1wk {
-        $theme.green
-    } else if $in < 4wk {
-        $theme.yellow
+    if $in < 1hr {
+      $theme.teal
+    } else if $in < 6hr {
+      $theme.green
+    } else if $in < 3day {
+      $theme.yellow
+    } else if $in < 3wk {
+      $theme.peach
     } else if $in < 12wk {
-        $theme.peach
+      $theme.maroon
     } else if $in < 52wk {
-        $theme.maroon
-    } else if $in > 52wk {
-        $theme.red
+      $theme.red
+    } else {
+      $theme.mauve
     }
   }
   background: $theme.base
