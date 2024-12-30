@@ -68,9 +68,9 @@ source ~/catppuccin_mocha.nu
 
 ## Building the themes
 
-Catppuccin for Helix uses [Whiskers](https://github.com/catppuccin/whiskers).
+Catppuccin for Nushell uses [Whiskers](https://github.com/catppuccin/whiskers).
 
-Modify the themes by editing [helix.tera](./helix.tera), then run `whiskers helix.tera` (or `just build`).
+Modify the themes by editing [nushell.tera](./nushell.tera), then run `whiskers nushell.tera` (or `just build`).
 
 ## 💝 Thanks to
 
