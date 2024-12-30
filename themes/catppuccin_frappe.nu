@@ -35,21 +35,21 @@ $env.config.color_config = {
   bool: $theme.peach
   int: $theme.peach
   filesize: {|fsize|
-      if $fsize < 1kb {
-          $theme.teal
-      } else if $fsize < 10kb {
-          $theme.green
-      } else if $fsize < 100kb {
-          $theme.yellow
-      } else if $fsize < 10mb {
-          $theme.peach
-      } else if $fsize < 100mb {
-          $theme.maroon
-      } else if $fsize < 1gb {
-          $theme.red
-      } else {
-		  $theme.mauve
-	  }
+    if $fsize < 1kb {
+      $theme.teal
+    } else if $fsize < 10kb {
+      $theme.green
+    } else if $fsize < 100kb {
+      $theme.yellow
+    } else if $fsize < 10mb {
+      $theme.peach
+    } else if $fsize < 100mb {
+      $theme.maroon
+    } else if $fsize < 1gb {
+      $theme.red
+    } else {
+	  $theme.mauve
+	}
   }
   duration: $theme.text
   date: {|| (date now) - $in |
