@@ -19,7 +19,6 @@
 
 ![image](https://github.com/user-attachments/assets/ff75e77b-ad5e-4d7a-9503-fbc6ee6212a5)
 
-
 When I get the green light from maintainers of catppuccin, I will generate the previews for this theme
 
 <details>
@@ -66,6 +65,9 @@ or
 ```nu
 source ~/catppuccin_mocha.nu
 ```
+
+> [!TIP]
+> Set `$env.config.highlight_resolved_externals = true` in your config which will highlight invalid commands in red
 
 ## Building the themes
 
