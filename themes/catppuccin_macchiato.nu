@@ -95,7 +95,7 @@ $env.config.color_config = {
   shape_block: $theme.blue
   shape_match_pattern: $theme.green
   shape_operator: $theme.sky
-  shape_table: $theme.lavender
+  shape_table: $theme.overlay2
   shape_variable: { fg: $theme.peach attr: i }
   shape_bool: $theme.peach
   shape_signature: $theme.teal

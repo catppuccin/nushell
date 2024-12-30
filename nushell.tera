@@ -202,10 +202,11 @@ $env.config.color_config = {
   #}
   shape_operator: $theme.sky{#
 
-  simply any sort of command even if its invalid. We can't color it a color like red since aliases don't get a special color
+  the highlights would apply to the semicolon, square backets and commans in the example:
+	[[col1, col2]; [val1, val2] [val3 val4]]
 
   #}
-  shape_table: $theme.lavender{#
+  shape_table: $theme.overlay2{#
 
   a variable like $c for example
 
