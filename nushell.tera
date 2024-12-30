@@ -41,15 +41,15 @@ $env.config.color_config = {
   }
   duration: $theme.text
   date: {|| (date now) - $in |
-    if $in < 1hr {
+    if $in < 1day {
       $theme.teal
-    } else if $in < 6hr {
+    } else if $in < 1wk {
       $theme.green
-    } else if $in < 3day {
+    } else if $in < 4wk {
       $theme.yellow
-    } else if $in < 3wk {
-      $theme.peach
     } else if $in < 12wk {
+      $theme.peach
+    } else if $in < 24wk {
       $theme.maroon
     } else if $in < 52wk {
       $theme.red
