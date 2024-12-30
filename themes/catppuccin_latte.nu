@@ -1,4 +1,4 @@
-let palette = {
+let theme = {
   rosewater: "#dc8a78"
   flamingo: "#dd7878"
   pink: "#ea76cb"
@@ -116,7 +116,7 @@ $env.config.color_config = {
   shape_datetime: $theme.peach
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
   glob: { fg: "#00ff00" bg: "#00ff00" }
-  shape_external_resolved: { fg: "#0000ff" bg: "#0000ff" }
+  shape_external_resolved: $theme.red
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
