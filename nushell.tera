@@ -290,6 +290,11 @@ $env.config.color_config = {
   #}
   shape_datetime: $theme.peach{#
 
+  Highlight invalid commands, works only if user sets 
+
+  #}
+  $env.config.highlight_resolved_externals = true{#
+
   Below highlights are not used.
 
   For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
@@ -297,20 +302,8 @@ $env.config.color_config = {
   But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
   #}
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
-  glob: { fg: "#00ff00" bg: "#00ff00" }{#
-
-  Highlight invalid commands
-
-  #}
-  shape_external_resolved: $theme.red
+  glob: { fg: "#00ff00" bg: "#00ff00" }  shape_external_resolved: $theme.red
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
-}{#
-
-This config option is required to color invalid commands as red
-For example user might type `sl` which will be colored red, while `ls` will be colored green
-
-#}
-$env.config.highlight_resolved_externals = true
-
+}
