@@ -17,7 +17,9 @@
 
 ## Previews
 
-TBD: Generate previews
+![image](https://github.com/user-attachments/assets/0e552d4b-aeae-46c7-9917-d0d75b636a8c)
+
+When I get the green light from maintainers of catppuccin, I will generate the previews for this theme
 
 <details>
 <summary>🌻 Latte</summary>
