@@ -40,30 +40,30 @@ When I get the green light from maintainers of catppuccin, I will generate the p
 
 ## Usage
 
-Copy and paste contents of the [catppuccin.nu](./catppuccin.nu) file into your nushell config.
+Download the theme file you would like to use to your computer in the home directory, for example.
 
-Then, depending on which flavor you want to use, change the `theme` variable:
+Then, depending on which theme you would like to use, add the following to your config:
 
 ```nu
-let theme = $catppuccin.mocha
+source ~/catppuccin_latte.nu
 ```
 
 or
 
 ```nu
-let theme = $catppuccin.frappe
+source ~/catppuccin_frappe.nu
 ```
 
 or
 
 ```nu
-let theme = $catppuccin.macchiato
+source ~/catppuccin_macchiato.nu
 ```
 
 or
 
 ```nu
-let theme = $catppuccin.latte
+source ~/catppuccin_mocha.nu
 ```
 
 ## 💝 Thanks to
