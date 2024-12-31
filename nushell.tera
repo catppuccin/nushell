@@ -48,21 +48,17 @@ $env.config.color_config = {
   #}
   header: { fg: $theme.text attr: b }{#
 
+  =========================
+
+  Highlights which change depending on the value
+
+  =========================
+ 
+
   > empty: This style is applied to empty/missing values in a table. However, since the ❎ emoji is used for this purpose, there is limited styling that can be applied.
 
   #}
-  empty: { attr: n }{#
-
-  > bool: true or false
-
-  #}
-  bool: $scheme.constant{#
-
-  Numeric values
-
-  #}
-  int: $scheme.constant
-  float: $scheme.constant
+  empty: { attr: n }
   filesize: {||
     if $in < 1kb {
       $theme.teal
@@ -115,17 +111,6 @@ $env.config.color_config = {
     }
   }{#
 
-  > foreground, background, and cursor: not handled by Nushell, but can be used by custom-commands such as `theme` from the nu_scripts repository. That `theme` command can be used to set the terminal foreground, background, and cursor colors.
-
-  #}
-  background: $theme.base
-  foreground: $theme.text
-  cursor: { bg: $theme.text fg: $theme.base }
-  range: $scheme.operator
-  string: $scheme.string
-  nothing: $scheme.constant
-  binary: $scheme.constant{#
-
   A cell-path access is for example the dot in this expression:
 
   $env.LS_COLORS
@@ -155,35 +140,13 @@ $env.config.color_config = {
 
   }#}
   shape_closure: $theme.teal
-  closure: $theme.teal
-  shape_directory: { fg: $scheme.filepath attr: b }{#
+  closure: $theme.teal{#
 
   > shape_externalarg: Arguments to an external command (whether resolved or not)
   
   #}
-  shape_externalarg: $theme.text
-  shape_filepath: $scheme.filepath
+  shape_externalarg: $theme.green
   shape_flag: { fg: $theme.maroon attr: i }{#
-
-  for instance, inputs to a command like `ls`. So `ls file1 *.txt`, both args are this
-
-  #}
-  shape_globpattern: $scheme.filepath{#
-
-  integers such as 1, 4, 15
-
-  #}
-  shape_int: $scheme.constant{#
-
-  > shape_internalcall: A known Nushell built-in or custom command in the "command position" (usually the first bare word of an expression).
-  
-  command that is a binary, e.g. `ls`
-
-  "Internal" commands are those defined within nushell which are valid
-  e.g. `ls` is an internal command
-
-  #}
-  shape_internalcall: $scheme.recognized_command{#
 
   syntax for lists, for example in [1, 2, 3, 4, 5] the square brackets and the comma use this syntax
 
@@ -196,39 +159,10 @@ $env.config.color_config = {
   #}
   shape_matching_brackets: { attr: u }{#
 
-  example:
-    null
-
-  #}
-  shape_nothing: $scheme.constant{#
-
-  example, the `|` in this command:
-    echo "hello world" | cat
-
-  #}
-  shape_pipe: $scheme.operator{#
-
   for example in { "apples": 543, "bananas": 411, "oranges": 0 }, the commas, curly braces and colons use this highlight
 
   #}
   shape_record: $scheme.punctuation{#
-
-  for example: 'hello world'
-
-  #}
-  shape_string: $scheme.string{#
-
-  symbols for the interpolated string, for example in $"greetings, ($name)" the following characters use this: $, first " and the last "
-
-  also the highlight for the `B` in e.g. 100B, `wk` in 10wk and other literals
-
-  #}
-  shape_string_interpolation: $theme.flamingo{#
-
-  for example: r#'hello world'
-
-  #}
-  shape_raw_string: $scheme.string{#
 
   invalid syntax and when an argument is an invalid type
 
@@ -283,21 +217,6 @@ $env.config.color_config = {
   }
   #}
   shape_match_pattern: $theme.green{#
-  In the following code, `in` and `==` use this highlight
-  [black red yellow green purple blue] | each {|c|
-    if ($c == "black") {
-     "classy"
-    } else if ($c in ["red", "green", "blue"]) {
-      "fundamental"
-    } else if ($c in ['yellow', "purple"]) {
-      "vibrant"
-    } else {
-      "innovative"
-    }
-  }
-
-  #}
-  shape_operator: $scheme.operator{#
 
   the highlights would apply to the semicolon, square backets and commans in the example:
 	[[col1, col2]; [val1, val2] [val3 val4]]
@@ -309,11 +228,6 @@ $env.config.color_config = {
 
   #}
   shape_variable: $scheme.variable{#
-
-  true and false
-
-  #}
-  shape_bool: $scheme.constant{#
 
   in the following code, highlight is applied to [tail: string]: [string -> string, list<string> -> list<string>]
 
@@ -340,6 +254,13 @@ $env.config.color_config = {
   #}
   shape_vardecl: $scheme.variable{#
 
+  =========================
+
+  Commands
+
+  =========================
+  
+
   commands which are not a part of nushell, or maybe they're not command at all
   e.g. `l` is not a command, but it gets this color
 
@@ -356,11 +277,75 @@ $env.config.color_config = {
   #}
   shape_external: $scheme.unrecognized_command{#
 
+  > shape_internalcall: A known Nushell built-in or custom command in the "command position" (usually the first bare word of an expression).
+  
+  command that is a binary, e.g. `ls`
+
+  "Internal" commands are those defined within nushell which are valid
+  e.g. `ls` is an internal command
+
+  #}
+  shape_internalcall: $scheme.recognized_command{#
+
+  Highlight valid external commands, works only if user sets:
+    $env.config.highlight_resolved_externals = true
+  #}
+  shape_external_resolved: $scheme.recognized_command{#
+
+  =========================
+
+  Not used by nushell directly
+
+  =========================
+
+
+  `custom` values are not directly used by nushell but *may* be used by plugins
+
+  #}
+  shape_custom: $theme.pink
+  custom: $theme.pink{#
+
+  > foreground, background, and cursor: not handled by Nushell, but can be used by custom-commands such as `theme` from the nu_scripts repository. That `theme` command can be used to set the terminal foreground, background, and cursor colors.
+
+  #}
+  background: $theme.base
+  foreground: $theme.text
+  cursor: { bg: $theme.text fg: $theme.base }{#
+
+  =========================
+
+  Operators
+
+  =========================
+ 
+
   a range like 1..5
   the ".." will be highlighted
 
   #}
-  shape_range: $scheme.operator{#
+  shape_range: $scheme.operator
+  range: $scheme.operator{#
+
+  example, the `|` in this command:
+    echo "hello world" | cat
+
+  #}
+  shape_pipe: $scheme.operator{#
+  In the following code, `in` and `==` use this highlight
+  [black red yellow green purple blue] | each {|c|
+    if ($c == "black") {
+     "classy"
+    } else if ($c in ["red", "green", "blue"]) {
+      "fundamental"
+    } else if ($c in ['yellow', "purple"]) {
+      "vibrant"
+    } else {
+      "innovative"
+    }
+  }
+
+  #}
+  shape_operator: $scheme.operator{#
 
   > shape_direction: The redirection symbols such as `o>`, `error>`, `e>|`, etc.
 
@@ -369,6 +354,71 @@ $env.config.color_config = {
 
   #}
   shape_redirection: $scheme.operator{#
+
+  =========================
+
+  Files
+
+  =========================
+
+
+  Below highlights are not used.
+
+  For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
+  
+  But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
+
+  #}
+  glob: $scheme.filepath
+  shape_directory: { fg: $scheme.filepath attr: b }
+  shape_filepath: $scheme.filepath
+  shape_glob_interpolation: $scheme.filepath{#
+
+  =========================
+
+  Constants
+
+  =========================
+
+  #}{#
+
+  for instance, inputs to a command like `ls`. So `ls file1 *.txt`, both args are this
+
+  #}
+  shape_globpattern: $scheme.filepath{#
+
+  > shape_int: integers such as 1, 4, 15
+
+  #}
+  shape_int: $scheme.constant{#
+
+  > int: integers such as 1, 4, 15
+
+  #}
+  int: $scheme.constant{#
+
+  > bool: true or false
+
+  #}
+  bool: $scheme.constant
+  float: $scheme.constant{#
+  > nothing: the `null` value
+  #}
+  nothing: $scheme.constant{#
+  > binary: such as 0b[10101010]
+  #}
+  binary: $scheme.constant{#
+
+  example:
+    null
+
+  #}
+  shape_nothing: $scheme.constant{#
+
+  true and false
+
+  #}
+  shape_bool: $scheme.constant{#
 
   e.g. 1.41
 
@@ -387,30 +437,37 @@ $env.config.color_config = {
     2022-02-02
     2022-02-02T14:30:00+05:00
 
-  #}
-  shape_datetime: $scheme.constant{#
-
-  Highlight valid external commands, works only if user sets:
-    $env.config.highlight_resolved_externals = true
-  #}
-  shape_external_resolved: $scheme.recognized_command{#
-
-  `custom` values are not directly used by nushell but *may* be used by plugins
+  We cannot pass closures to shape_* otherwise we would do it to have different colors for different dates
 
   #}
-  shape_custom: $theme.pink
-  custom: $theme.pink{#
+  shape_datetime: $scheme.constant
+  shape_literal: $scheme.constant{#
 
-  Below highlights are not used.
+  =========================
 
-  For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
-  
-  But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
+  Strings
+
+  =========================
 
   #}
-  glob: $scheme.filepath
-  shape_literal: $scheme.constant
-  shape_glob_interpolation: $scheme.filepath
+  string: $scheme.string{#
+
+  for example: 'hello world'
+
+  #}
+  shape_string: $scheme.string{#
+
+  symbols for the interpolated string, for example in $"greetings, ($name)" the following characters use this: $, first " and the last "
+
+  also the highlight for the `B` in e.g. 100B, `wk` in 10wk and other literals
+
+  #}
+  shape_string_interpolation: $theme.flamingo{#
+
+  for example: r#'hello world'
+
+  #}
+  shape_raw_string: $scheme.string
 }{#
 
 This is required to be able to highlight valid commands and use the shape_external_resolved option

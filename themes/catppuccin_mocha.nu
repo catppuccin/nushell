@@ -44,9 +44,6 @@ $env.config.color_config = {
   leading_trailing_space_bg: { fg: $theme.lavender attr: u }
   header: { fg: $theme.text attr: b }
   empty: { attr: n }
-  bool: $scheme.constant
-  int: $scheme.constant
-  float: $scheme.constant
   filesize: {||
     if $in < 1kb {
       $theme.teal
@@ -98,13 +95,6 @@ $env.config.color_config = {
       $theme.mauve
     }
   }
-  background: $theme.base
-  foreground: $theme.text
-  cursor: { bg: $theme.text fg: $theme.base }
-  range: $scheme.operator
-  string: $scheme.string
-  nothing: $scheme.constant
-  binary: $scheme.constant
   cell-path: $scheme.punctuation
   row_index: $scheme.virtual_text
   record: $theme.text
@@ -113,47 +103,56 @@ $env.config.color_config = {
   search_result: { fg: $theme.base bg: $theme.blue }
   shape_closure: $theme.teal
   closure: $theme.teal
-  shape_directory: { fg: $scheme.filepath attr: b }
-  shape_externalarg: $theme.text
-  shape_filepath: $scheme.filepath
+  shape_externalarg: $theme.green
   shape_flag: { fg: $theme.maroon attr: i }
-  shape_globpattern: $scheme.filepath
-  shape_int: $scheme.constant
-  shape_internalcall: $scheme.recognized_command
   shape_list: $scheme.punctuation
   shape_matching_brackets: { attr: u }
-  shape_nothing: $scheme.constant
-  shape_pipe: $scheme.operator
   shape_record: $scheme.punctuation
-  shape_string: $scheme.string
-  shape_string_interpolation: $theme.flamingo
-  shape_raw_string: $scheme.string
   shape_garbage: $theme.red
   shape_keyword: $theme.mauve
   shape_block: $theme.blue
   block: $theme.blue
   shape_match_pattern: $theme.green
-  shape_operator: $scheme.operator
   shape_table: $scheme.punctuation
   shape_variable: $scheme.variable
-  shape_bool: $scheme.constant
   shape_signature: $theme.teal
   shape_vardecl: $scheme.variable
   shape_external: $scheme.unrecognized_command
-  shape_range: $scheme.operator
-  shape_redirection: $scheme.operator
-  shape_float: $scheme.constant
-  shape_binary: $scheme.constant
-  shape_datetime: $scheme.constant
+  shape_internalcall: $scheme.recognized_command
   shape_external_resolved: $scheme.recognized_command
   shape_custom: $theme.pink
   custom: $theme.pink
-  glob: { fg: "#00ff00" bg: "#00ff00" }
+  background: $theme.base
+  foreground: $theme.text
+  cursor: { bg: $theme.text fg: $theme.base }
+  shape_range: $scheme.operator
+  range: $scheme.operator
+  shape_pipe: $scheme.operator
+  shape_operator: $scheme.operator
+  shape_redirection: $scheme.operator
+  glob: $scheme.filepath
+  shape_directory: { fg: $scheme.filepath attr: b }
+  shape_filepath: $scheme.filepath
+  shape_glob_interpolation: $scheme.filepath
+  shape_globpattern: $scheme.filepath
+  shape_int: $scheme.constant
+  int: $scheme.constant
+  bool: $scheme.constant
+  float: $scheme.constant
+  nothing: $scheme.constant
+  binary: $scheme.constant
+  shape_nothing: $scheme.constant
+  shape_bool: $scheme.constant
+  shape_float: $scheme.constant
+  shape_binary: $scheme.constant
+  shape_datetime: $scheme.constant
   shape_literal: $scheme.constant
-  shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
+  string: $scheme.string
+  shape_string: $scheme.string
+  shape_string_interpolation: $theme.flamingo
+  shape_raw_string: $scheme.string
 }
 $env.config.highlight_resolved_externals = true
-
 $env.config.explore = {
     status_bar_background: { fg: $theme.text, bg: $theme.mantle },
     command_bar_text: { fg: $theme.text },
