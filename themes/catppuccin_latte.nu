@@ -27,13 +27,23 @@ let theme = {
   crust: "#dce0e8"
 }
 
+let scheme = {
+  recognized_command: $theme.blue
+  unrecognized_command: $theme.text
+  constant: $theme.peach
+  punctuation: $theme.overlay2
+  operator: $theme.sky
+  string: $theme.green
+  virtual_text: $theme.surface2
+}
+
 $env.config.color_config = {
   separator: { fg: $theme.surface2 attr: b }
   leading_trailing_space_bg: { attr: n }
   header: $theme.text
   empty: { bg: $theme.green fg: $theme.base }
-  bool: $theme.peach
-  int: $theme.peach
+  bool: $scheme.constant
+  int: $scheme.constant
   filesize: {|fsize|
     if $fsize < 1kb {
       $theme.teal
@@ -48,10 +58,10 @@ $env.config.color_config = {
     } else if $fsize < 1gb {
       $theme.red
     } else {
-	  $theme.mauve
-	}
+      $theme.mauve
+    }
   }
-  duration: $theme.text
+  duration: $scheme.constant
   date: {|| (date now) - $in |
     if $in < 1day {
       $theme.teal
@@ -71,54 +81,53 @@ $env.config.color_config = {
   }
   background: $theme.base
   foreground: $theme.text
-  range: $theme.text
-  float: $theme.text
-  string: $theme.text
-  nothing: $theme.text
-  binary: $theme.text
-  cell-path: $theme.text
+  range: $scheme.operator
+  float: $scheme.constant
+  string: $scheme.string
+  nothing: $scheme.constant
+  binary: $scheme.constant
+  cell-path: $scheme.punctuation
   row_index: $theme.subtext1
   record: $theme.text
   list: $theme.text
-  hints: $theme.surface2
-  search_result: { bg: $theme.red fg: $theme.base }
+  hints: $scheme.virtual_text
+  search_result: { attr: r }
   shape_closure: $theme.teal
   shape_directory: $theme.blue
   shape_externalarg: $theme.text
   shape_filepath: $theme.blue
   shape_flag: { fg: $theme.maroon attr: i }
   shape_globpattern: $theme.text
-  shape_int: $theme.peach
-  shape_internalcall: $theme.green
-  shape_list: $theme.overlay2
+  shape_int: $scheme.constant
+  shape_internalcall: $scheme.recognized_command
+  shape_list: $scheme.punctuation
   shape_matching_brackets: { attr: u }
-  shape_nothing: $theme.peach
-  shape_pipe: $theme.sky
-  shape_record: $theme.overlay2
-  shape_string: $theme.green
+  shape_nothing: $scheme.constant
+  shape_pipe: $scheme.operator
+  shape_record: $scheme.punctuation
+  shape_string: $scheme.string
   shape_string_interpolation: $theme.flamingo
-  shape_raw_string: $theme.green
+  shape_raw_string: $scheme.string
   shape_garbage: $theme.red
   shape_keyword: $theme.mauve
   shape_block: $theme.blue
   shape_match_pattern: $theme.green
-  shape_operator: $theme.sky
-  shape_table: $theme.overlay2
+  shape_operator: $scheme.operator
+  shape_table: $scheme.punctuation
   shape_variable: { fg: $theme.peach attr: i }
-  shape_bool: $theme.peach
+  shape_bool: $scheme.constant
   shape_signature: $theme.teal
   shape_vardecl: { fg: $theme.peach attr: i }
-  shape_external: $theme.red
-  shape_range: $theme.sky
+  shape_external: $scheme.unrecognized_command
+  shape_range: $scheme.operator
   shape_redirection: { fg: $theme.text attr: b }
-  shape_float: $theme.peach
-  shape_binary: $theme.peach
-  shape_datetime: $theme.peach
-  shape_external_resolved: $theme.green
+  shape_float: $scheme.constant
+  shape_binary: $scheme.constant
+  shape_datetime: $scheme.constant
+  shape_external_resolved: $scheme.recognized_command
   shape_custom: { fg: "#ff0000" bg: "#ff0000" }
   glob: { fg: "#00ff00" bg: "#00ff00" }
   shape_literal: { fg: "#ffff00" bg: "#ffff00" }
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
   block: { fg: "#00ffff" bg: "#00ffff" }
 }
-$env.config.highlight_resolved_externals = true

@@ -11,6 +11,24 @@ let theme = {
 {%-endfor %}
 }
 
+let scheme = {
+{#
+
+Nushell isn't able to recognize valid and invalid commands correctly.
+
+For example, if user sets highlight_resolved_externals is set to false then nushell won't be able to highlight absolutely correct commands like `lazygit`
+
+We don't want to color it as red for this reason, since it could potentially be a command still. For commands that are 100% valid, we use blue since they are functions
+
+#}  recognized_command: $theme.blue
+  unrecognized_command: $theme.text
+  constant: $theme.peach
+  punctuation: $theme.overlay2
+  operator: $theme.sky
+  string: $theme.green
+  virtual_text: $theme.surface2
+}
+
 $env.config.color_config = {
 {#
 
@@ -20,8 +38,8 @@ $env.config.color_config = {
   leading_trailing_space_bg: { attr: n }
   header: $theme.text
   empty: { bg: $theme.green fg: $theme.base }
-  bool: $theme.peach
-  int: $theme.peach
+  bool: $scheme.constant
+  int: $scheme.constant
   filesize: {|fsize|
     if $fsize < 1kb {
       $theme.teal
@@ -36,10 +54,10 @@ $env.config.color_config = {
     } else if $fsize < 1gb {
       $theme.red
     } else {
-	  $theme.mauve
-	}
+      $theme.mauve
+    }
   }
-  duration: $theme.text
+  duration: $scheme.constant
   date: {|| (date now) - $in |
     if $in < 1day {
       $theme.teal
@@ -59,17 +77,23 @@ $env.config.color_config = {
   }
   background: $theme.base
   foreground: $theme.text
-  range: $theme.text
-  float: $theme.text
-  string: $theme.text
-  nothing: $theme.text
-  binary: $theme.text
-  cell-path: $theme.text
+  range: $scheme.operator
+  float: $scheme.constant
+  string: $scheme.string
+  nothing: $scheme.constant
+  binary: $scheme.constant{#
+
+  A cell-path access is for example the dot in this expression:
+
+  $env.LS_COLORS
+
+  #}
+  cell-path: $scheme.punctuation
   row_index: $theme.subtext1
   record: $theme.text
   list: $theme.text
-  hints: $theme.surface2
-  search_result: { bg: $theme.red fg: $theme.base }{#
+  hints: $scheme.virtual_text
+  search_result: { attr: r }{#
 
   in the following code, the closure inside the "list" path `|el|` has this color, as well as the surrounding curly braces
   def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
@@ -95,7 +119,7 @@ $env.config.color_config = {
   integers such as 1, 4, 15
 
   #}
-  shape_int: $theme.peach{#
+  shape_int: $scheme.constant{#
 
   command that is a binary, e.g. `ls`
 
@@ -103,12 +127,12 @@ $env.config.color_config = {
   e.g. `ls` is an internal command
 
   #}
-  shape_internalcall: $theme.green{#
+  shape_internalcall: $scheme.recognized_command{#
 
   syntax for lists, for example in [1, 2, 3, 4, 5] the square brackets and the comma use this syntax
 
   #}
-  shape_list: $theme.overlay2{#
+  shape_list: $scheme.punctuation{#
 
   whatever is matching, for example we could be autocompleting on a filename
   the part of the filename which matches what we have is going to have this style
@@ -120,23 +144,23 @@ $env.config.color_config = {
     null
 
   #}
-  shape_nothing: $theme.peach{#
+  shape_nothing: $scheme.constant{#
 
   example, the `|` in this command:
     echo "hello world" | cat
 
   #}
-  shape_pipe: $theme.sky{#
+  shape_pipe: $scheme.operator{#
 
   for example in { "apples": 543, "bananas": 411, "oranges": 0 }, the commas, curly braces and colons use this highlight
 
   #}
-  shape_record: $theme.overlay2{#
+  shape_record: $scheme.punctuation{#
 
   for example: 'hello world'
 
   #}
-  shape_string: $theme.green{#
+  shape_string: $scheme.string{#
 
   symbols for the interpolated string, for example in $"greetings, ($name)" the following characters use this: $, first " and the last "
 
@@ -148,7 +172,7 @@ $env.config.color_config = {
   for example: r#'hello world'
 
   #}
-  shape_raw_string: $theme.green{#
+  shape_raw_string: $scheme.string{#
 
   invalid syntax
 
@@ -166,6 +190,8 @@ $env.config.color_config = {
       "innovative"
     }
   }
+
+  Note: Nushell can't color things most would consider as "keywords" like if, let and mut. Those are technically "commands" and we cannot change their color without also changing the color of `ls` for example
 
   #}
   shape_keyword: $theme.mauve{#
@@ -211,13 +237,13 @@ $env.config.color_config = {
   }
 
   #}
-  shape_operator: $theme.sky{#
+  shape_operator: $scheme.operator{#
 
   the highlights would apply to the semicolon, square backets and commans in the example:
 	[[col1, col2]; [val1, val2] [val3 val4]]
 
   #}
-  shape_table: $theme.overlay2{#
+  shape_table: $scheme.punctuation{#
 
   a variable like $c for example
 
@@ -227,7 +253,7 @@ $env.config.color_config = {
   true and false
 
   #}
-  shape_bool: $theme.peach{#
+  shape_bool: $scheme.constant{#
 
   in the following code, highlight is applied to [tail: string]: [string -> string, list<string> -> list<string>]
 
@@ -268,12 +294,13 @@ $env.config.color_config = {
   - All other commands (so all invalid commands) will be then highlighted with this option
 
   #}
-  shape_external: $theme.red{#
+  shape_external: $scheme.unrecognized_command{#
 
   a range like 1..5
+  the ".." will be highlighted
 
   #}
-  shape_range: $theme.sky{#
+  shape_range: $scheme.operator{#
 
   in the following snippet, `out>` and `err>` are redirection
   cat unknown.txt out> out.log err> err.log
@@ -284,7 +311,7 @@ $env.config.color_config = {
   e.g. 1.41
 
   #}
-  shape_float: $theme.peach{#
+  shape_float: $scheme.constant{#
 
   for example
   0x[ffffff]
@@ -292,19 +319,19 @@ $env.config.color_config = {
   0b[1010110101001]
 
   #}
-  shape_binary: $theme.peach{#
+  shape_binary: $scheme.constant{#
 
   for example:
     2022-02-02
     2022-02-02T14:30:00+05:00
 
   #}
-  shape_datetime: $theme.peach{#
+  shape_datetime: $scheme.constant{#
 
-  Highlight valid external commands, works only if user sets 
-  $env.config.highlight_resolved_externals = true
+  Highlight valid external commands, works only if user sets:
+    $env.config.highlight_resolved_externals = true
   #}
-  shape_external_resolved: $theme.green{#
+  shape_external_resolved: $scheme.recognized_command{#
 
   Below highlights are not used.
 
@@ -320,9 +347,12 @@ $env.config.color_config = {
   block: { fg: "#00ffff" bg: "#00ffff" }
 }{#
 
-This is required to be able to highlight valid commands in green and use the shape_external_resolved option
+This is required to be able to highlight valid commands and use the shape_external_resolved option
 
 e.g. `lazygit` is a valid command, but it is external. It will get recognized as a correct command with this config
 
-#}
 $env.config.highlight_resolved_externals = true
+
+We don't set it as the default since this theme only sets colors. Nushell maintainers chose to disable it by default since it can affect performance negatively
+
+#}
