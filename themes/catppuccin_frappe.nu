@@ -43,6 +43,25 @@ $env.config.color_config = {
   separator: { fg: $theme.surface2 attr: b }
   leading_trailing_space_bg: { fg: $theme.lavender attr: u }
   header: { fg: $theme.text attr: b }
+  row_index: $scheme.virtual_text
+  record: $theme.text
+  list: $theme.text
+  hints: $scheme.virtual_text
+  search_result: { fg: $theme.base bg: $theme.blue }
+  shape_closure: $theme.teal
+  closure: $theme.teal
+  shape_flag: { fg: $theme.maroon attr: i }
+  shape_matching_brackets: { attr: u }
+  shape_garbage: $theme.red
+  shape_keyword: $theme.mauve
+  shape_match_pattern: $theme.green
+  shape_signature: $theme.teal
+  shape_table: $scheme.punctuation
+  cell-path: $scheme.punctuation
+  shape_list: $scheme.punctuation
+  shape_record: $scheme.punctuation
+  shape_vardecl: $scheme.variable
+  shape_variable: $scheme.variable
   empty: { attr: n }
   filesize: {||
     if $in < 1kb {
@@ -95,31 +114,11 @@ $env.config.color_config = {
       $theme.mauve
     }
   }
-  cell-path: $scheme.punctuation
-  row_index: $scheme.virtual_text
-  record: $theme.text
-  list: $theme.text
-  hints: $scheme.virtual_text
-  search_result: { fg: $theme.base bg: $theme.blue }
-  shape_closure: $theme.teal
-  closure: $theme.teal
-  shape_externalarg: $theme.green
-  shape_flag: { fg: $theme.maroon attr: i }
-  shape_list: $scheme.punctuation
-  shape_matching_brackets: { attr: u }
-  shape_record: $scheme.punctuation
-  shape_garbage: $theme.red
-  shape_keyword: $theme.mauve
-  shape_block: $theme.blue
-  block: $theme.blue
-  shape_match_pattern: $theme.green
-  shape_table: $scheme.punctuation
-  shape_variable: $scheme.variable
-  shape_signature: $theme.teal
-  shape_vardecl: $scheme.variable
   shape_external: $scheme.unrecognized_command
   shape_internalcall: $scheme.recognized_command
   shape_external_resolved: $scheme.recognized_command
+  shape_block: $scheme.recognized_command
+  block: $scheme.recognized_command
   shape_custom: $theme.pink
   custom: $theme.pink
   background: $theme.base
@@ -151,6 +150,7 @@ $env.config.color_config = {
   shape_string: $scheme.string
   shape_string_interpolation: $theme.flamingo
   shape_raw_string: $scheme.string
+  shape_externalarg: $scheme.string
 }
 $env.config.highlight_resolved_externals = true
 $env.config.explore = {

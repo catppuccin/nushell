@@ -48,6 +48,140 @@ $env.config.color_config = {
   #}
   header: { fg: $theme.text attr: b }{#
 
+  If you put the expression [1,2,3,4,5] into the terminal
+  It will output a formatter array, showing all of its indexes and each element
+  The color of these indexes will have this highlight
+
+  #}
+  row_index: $scheme.virtual_text
+  record: $theme.text
+  list: $theme.text
+  hints: $scheme.virtual_text
+  search_result: { fg: $theme.base bg: $theme.blue }{#
+
+  in the following code, the closure inside the "list" path `|el|` has this color, as well as the surrounding curly braces
+  def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
+      let input = $in
+      match ($input | describe | str replace --regex '<.*' '\') {
+          "string" => { $input ++ $tail },
+          "list" => { $input | each {|el| $el ++ $tail} },
+          _ => $input
+      }
+
+  }#}
+  shape_closure: $theme.teal
+  closure: $theme.teal
+  shape_flag: { fg: $theme.maroon attr: i }{#
+
+  whatever is matching, for example we could be autocompleting on a filename
+  the part of the filename which matches what we have is going to have this style
+
+  #}
+  shape_matching_brackets: { attr: u }{#
+
+  invalid syntax and when an argument is an invalid type
+
+  #}
+  shape_garbage: $theme.red{#
+  In the following code, `else` uses this highlight
+  [black red yellow green purple blue] | each {|c|
+    if ($c == "black") {
+     "classy"
+    } else if ($c in ["red", "green", "blue"]) {
+      "fundamental"
+    } else if ($c in ['yellow', "purple"]) {
+      "vibrant"
+    } else {
+      "innovative"
+    }
+  }
+
+  Note: Nushell can't color things most would consider as "keywords" like if, let and mut. Those are technically "commands" and we cannot change their color without also changing the color of `ls` for example
+
+  #}
+  shape_keyword: $theme.mauve{#
+
+  > shape_match_pattern: The matching pattern for each arm in a match expression. Does not include the guard expression (if present).
+  
+  in the following code, all the possibilities are match items
+  
+  [black red yellow green purple blue indigo] | each {|c|
+    match $c {
+      "black" => "classy"
+      "red" | "green" | "blue" => "fundamental"
+      "yellow" | "purple" => "vibrant"
+      _ => "innovative"
+    }
+  }
+  #}
+  shape_match_pattern: $theme.green{#
+
+  in the following code, highlight is applied to [tail: string]: [string -> string, list<string> -> list<string>]
+
+  def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
+      let input = $in
+      match ($input | describe | str replace --regex '<.*' '\') {
+          "string" => { $input ++ $tail },
+          "list" => { $input | each {|el| $el ++ $tail} },
+          _ => $input
+      }
+  }
+
+  #}
+  shape_signature: $theme.teal{#
+
+  =========================
+
+  Punctuation
+
+  =========================
+
+  the highlights would apply to the semicolon, square backets and commans in the example:
+	[[col1, col2]; [val1, val2] [val3 val4]]
+
+  #}
+  shape_table: $scheme.punctuation{#
+
+  A cell-path access is for example the dot in this expression:
+
+  $env.LS_COLORS
+
+  #}
+  cell-path: $scheme.punctuation{#
+
+  syntax for lists, for example in [1, 2, 3, 4, 5] the square brackets and the comma use this syntax
+
+  #}
+  shape_list: $scheme.punctuation{#
+
+  for example in { "apples": 543, "bananas": 411, "oranges": 0 }, the commas, curly braces and colons use this highlight
+
+  #}
+  shape_record: $scheme.punctuation{#
+
+  =========================
+
+  Variables
+
+  =========================
+  
+
+  in the following snippet, `fish_completer` declaration gets this highlight
+
+  let fish_completer = {|spans|
+      fish --command $'complete "--do-complete=($spans | str join " ")"'
+      | from tsv --flexible --noheaders --no-infer
+      | rename value description
+  }
+
+  #}
+  shape_vardecl: $scheme.variable{#
+
+  a variable like $c for example
+
+  #}
+  shape_variable: $scheme.variable{#
+
   =========================
 
   Highlights which change depending on the value
@@ -111,149 +245,6 @@ $env.config.color_config = {
     }
   }{#
 
-  A cell-path access is for example the dot in this expression:
-
-  $env.LS_COLORS
-
-  #}
-  cell-path: $scheme.punctuation{#
-
-  If you put the expression [1,2,3,4,5] into the terminal
-  It will output a formatter array, showing all of its indexes and each element
-  The color of these indexes will have this highlight
-
-  #}
-  row_index: $scheme.virtual_text
-  record: $theme.text
-  list: $theme.text
-  hints: $scheme.virtual_text
-  search_result: { fg: $theme.base bg: $theme.blue }{#
-
-  in the following code, the closure inside the "list" path `|el|` has this color, as well as the surrounding curly braces
-  def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
-      let input = $in
-      match ($input | describe | str replace --regex '<.*' '\') {
-          "string" => { $input ++ $tail },
-          "list" => { $input | each {|el| $el ++ $tail} },
-          _ => $input
-      }
-
-  }#}
-  shape_closure: $theme.teal
-  closure: $theme.teal{#
-
-  > shape_externalarg: Arguments to an external command (whether resolved or not)
-  
-  #}
-  shape_externalarg: $theme.green
-  shape_flag: { fg: $theme.maroon attr: i }{#
-
-  syntax for lists, for example in [1, 2, 3, 4, 5] the square brackets and the comma use this syntax
-
-  #}
-  shape_list: $scheme.punctuation{#
-
-  whatever is matching, for example we could be autocompleting on a filename
-  the part of the filename which matches what we have is going to have this style
-
-  #}
-  shape_matching_brackets: { attr: u }{#
-
-  for example in { "apples": 543, "bananas": 411, "oranges": 0 }, the commas, curly braces and colons use this highlight
-
-  #}
-  shape_record: $scheme.punctuation{#
-
-  invalid syntax and when an argument is an invalid type
-
-  #}
-  shape_garbage: $theme.red{#
-  In the following code, `else` uses this highlight
-  [black red yellow green purple blue] | each {|c|
-    if ($c == "black") {
-     "classy"
-    } else if ($c in ["red", "green", "blue"]) {
-      "fundamental"
-    } else if ($c in ['yellow', "purple"]) {
-      "vibrant"
-    } else {
-      "innovative"
-    }
-  }
-
-  Note: Nushell can't color things most would consider as "keywords" like if, let and mut. Those are technically "commands" and we cannot change their color without also changing the color of `ls` for example
-
-  #}
-  shape_keyword: $theme.mauve{#
-
-  In the following code, the indentation uses this highlight
-  as well as the first `if`, the parentheses around the condition, and the curly braces inside of each of the conditions
-  [black red yellow green purple blue] | each {|c|
-    if ($c == "black") {
-     "classy"
-    } else if ($c in ["red", "green", "blue"]) {
-      "fundamental"
-    } else if ($c in ['yellow', "purple"]) {
-      "vibrant"
-    } else {
-      "innovative"
-    }
-  }
-
-  #}
-  shape_block: $theme.blue
-  block: $theme.blue{#
-
-  > shape_match_pattern: The matching pattern for each arm in a match expression. Does not include the guard expression (if present).
-  
-  in the following code, all the possibilities are match items
-  [black red yellow green purple blue indigo] | each {|c|
-    match $c {
-      "black" => "classy"
-      "red" | "green" | "blue" => "fundamental"
-      "yellow" | "purple" => "vibrant"
-      _ => "innovative"
-    }
-  }
-  #}
-  shape_match_pattern: $theme.green{#
-
-  the highlights would apply to the semicolon, square backets and commans in the example:
-	[[col1, col2]; [val1, val2] [val3 val4]]
-
-  #}
-  shape_table: $scheme.punctuation{#
-
-  a variable like $c for example
-
-  #}
-  shape_variable: $scheme.variable{#
-
-  in the following code, highlight is applied to [tail: string]: [string -> string, list<string> -> list<string>]
-
-  def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
-      let input = $in
-      match ($input | describe | str replace --regex '<.*' '\') {
-          "string" => { $input ++ $tail },
-          "list" => { $input | each {|el| $el ++ $tail} },
-          _ => $input
-      }
-  }
-
-  #}
-  shape_signature: $theme.teal{#
-
-  in the following snippet, `fish_completer` declaration gets this highlight
-
-  let fish_completer = {|spans|
-      fish --command $'complete "--do-complete=($spans | str join " ")"'
-      | from tsv --flexible --noheaders --no-infer
-      | rename value description
-  }
-
-  #}
-  shape_vardecl: $scheme.variable{#
-
   =========================
 
   Commands
@@ -291,6 +282,26 @@ $env.config.color_config = {
     $env.config.highlight_resolved_externals = true
   #}
   shape_external_resolved: $scheme.recognized_command{#
+
+  In the following code, the indentation uses this highlight
+  as well as the first `if`, the parentheses around the condition, and the curly braces inside of each of the conditions
+  [black red yellow green purple blue] | each {|c|
+    if ($c == "black") {
+     "classy"
+    } else if ($c in ["red", "green", "blue"]) {
+      "fundamental"
+    } else if ($c in ['yellow', "purple"]) {
+      "vibrant"
+    } else {
+      "innovative"
+    }
+  }
+
+  This is going to be the same color as commands since sometimes it also highlights the `if`, to be consistent it should be blue as well.
+
+  #}
+  shape_block: $scheme.recognized_command
+  block: $scheme.recognized_command{#
 
   =========================
 
@@ -467,7 +478,14 @@ $env.config.color_config = {
   for example: r#'hello world'
 
   #}
-  shape_raw_string: $scheme.string
+  shape_raw_string: $scheme.string{#
+
+  > shape_externalarg: Arguments to an external command (whether resolved or not)
+
+  We're going to assume that each external command accepts strings. So it's going to be green
+  
+  #}
+  shape_externalarg: $scheme.string
 }{#
 
 This is required to be able to highlight valid commands and use the shape_external_resolved option
