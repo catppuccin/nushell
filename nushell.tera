@@ -142,7 +142,7 @@ $env.config.color_config = {
   record: $theme.text
   list: $theme.text
   hints: $scheme.virtual_text
-  search_result: { attr: u }{#
+  search_result: { fg: $theme.base bg: $theme.blue }{#
 
   in the following code, the closure inside the "list" path `|el|` has this color, as well as the surrounding curly braces
   def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
@@ -402,3 +402,17 @@ e.g. `lazygit` is a valid command, but it is external. It will get recognized as
 
 #}
 $env.config.highlight_resolved_externals = true
+{#
+explore command colors
+#}
+$env.config.explore = {
+    status_bar_background: { fg: $theme.text, bg: $theme.mantle },
+    command_bar_text: { fg: $theme.text },
+    highlight: { fg: $theme.base, bg: $theme.yellow },
+    status: {
+        error: $theme.red,
+        warn: $theme.yellow,
+        info: $theme.blue,
+    },
+    selected_cell: { bg: $theme.blue fg: $theme.base },
+}
