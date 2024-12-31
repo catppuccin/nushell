@@ -41,11 +41,12 @@ let scheme = {
 
 $env.config.color_config = {
   separator: { fg: $theme.surface2 attr: b }
-  leading_trailing_space_bg: { attr: n }
+  leading_trailing_space_bg: { fg: $theme.lavender attr: u }
   header: { fg: $theme.text attr: b }
   empty: { attr: n }
   bool: $scheme.constant
   int: $scheme.constant
+  float: $scheme.constant
   filesize: {||
     if $in < 1kb {
       $theme.teal
@@ -99,8 +100,8 @@ $env.config.color_config = {
   }
   background: $theme.base
   foreground: $theme.text
+  cursor: { bg: $theme.text fg: $theme.base }
   range: $scheme.operator
-  float: $scheme.constant
   string: $scheme.string
   nothing: $scheme.constant
   binary: $scheme.constant
@@ -109,8 +110,9 @@ $env.config.color_config = {
   record: $theme.text
   list: $theme.text
   hints: $scheme.virtual_text
-  search_result: { attr: u }
+  search_result: { fg: $theme.base bg: $theme.blue }
   shape_closure: $theme.teal
+  closure: $theme.teal
   shape_directory: { fg: $scheme.filepath attr: b }
   shape_externalarg: $theme.text
   shape_filepath: $scheme.filepath
@@ -129,6 +131,7 @@ $env.config.color_config = {
   shape_garbage: $theme.red
   shape_keyword: $theme.mauve
   shape_block: $theme.blue
+  block: $theme.blue
   shape_match_pattern: $theme.green
   shape_operator: $scheme.operator
   shape_table: $scheme.punctuation
@@ -143,9 +146,22 @@ $env.config.color_config = {
   shape_binary: $scheme.constant
   shape_datetime: $scheme.constant
   shape_external_resolved: $scheme.recognized_command
-  shape_custom: { fg: "#ff0000" bg: "#ff0000" }
+  shape_custom: $theme.pink
+  custom: $theme.pink
   glob: { fg: "#00ff00" bg: "#00ff00" }
-  shape_literal: { fg: "#ffff00" bg: "#ffff00" }
+  shape_literal: $scheme.constant
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
-  block: { fg: "#00ffff" bg: "#00ffff" }
+}
+$env.config.highlight_resolved_externals = true
+
+$env.config.explore = {
+    status_bar_background: { fg: $theme.text, bg: $theme.mantle },
+    command_bar_text: { fg: $theme.text },
+    highlight: { fg: $theme.base, bg: $theme.yellow },
+    status: {
+        error: $theme.red,
+        warn: $theme.yellow,
+        info: $theme.blue,
+    },
+    selected_cell: { bg: $theme.blue fg: $theme.base },
 }
