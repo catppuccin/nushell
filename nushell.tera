@@ -14,7 +14,7 @@ let theme = {
 let scheme = {
 {#
 
-Nushell isn't able to recognize valid and invalid commands correctly.
+Nushell isn't able to always recognize valid and invalid commands correctly.
 
 For example, if user sets highlight_resolved_externals is set to false then nushell won't be able to highlight absolutely correct commands like `lazygit`
 
