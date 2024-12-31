@@ -41,24 +41,40 @@ $env.config.color_config = {
   empty: { attr: n }
   bool: $scheme.constant
   int: $scheme.constant
-  filesize: {|fsize|
-    if $fsize < 1kb {
+  filesize: {||
+    if $in < 1kb {
       $theme.teal
-    } else if $fsize < 10kb {
+    } else if $in < 10kb {
       $theme.green
-    } else if $fsize < 100kb {
+    } else if $in < 100kb {
       $theme.yellow
-    } else if $fsize < 10mb {
+    } else if $in < 10mb {
       $theme.peach
-    } else if $fsize < 100mb {
+    } else if $in < 100mb {
       $theme.maroon
-    } else if $fsize < 1gb {
+    } else if $in < 1gb {
       $theme.red
     } else {
       $theme.mauve
     }
   }
-  duration: $scheme.constant
+  duration: {||
+    if $in < 1day {
+      $theme.teal
+    } else if $in < 1wk {
+      $theme.green
+    } else if $in < 4wk {
+      $theme.yellow
+    } else if $in < 12wk {
+      $theme.peach
+    } else if $in < 24wk {
+      $theme.maroon
+    } else if $in < 52wk {
+      $theme.red
+    } else {
+      $theme.mauve
+    }
+  }
   date: {|| (date now) - $in |
     if $in < 1day {
       $theme.teal
