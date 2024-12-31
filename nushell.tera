@@ -155,7 +155,12 @@ $env.config.color_config = {
 
   }#}
   shape_closure: $theme.teal
-  shape_directory: { fg: $scheme.filepath attr: b }
+  closure: $theme.teal
+  shape_directory: { fg: $scheme.filepath attr: b }{#
+
+  > shape_externalarg: Arguments to an external command (whether resolved or not)
+  
+  #}
   shape_externalarg: $theme.text
   shape_filepath: $scheme.filepath
   shape_flag: { fg: $theme.maroon attr: i }{#
@@ -170,6 +175,8 @@ $env.config.color_config = {
   #}
   shape_int: $scheme.constant{#
 
+  > shape_internalcall: A known Nushell built-in or custom command in the "command position" (usually the first bare word of an expression).
+  
   command that is a binary, e.g. `ls`
 
   "Internal" commands are those defined within nushell which are valid
@@ -223,7 +230,7 @@ $env.config.color_config = {
   #}
   shape_raw_string: $scheme.string{#
 
-  invalid syntax
+  invalid syntax and when an argument is an invalid type
 
   #}
   shape_garbage: $theme.red{#
@@ -260,7 +267,11 @@ $env.config.color_config = {
   }
 
   #}
-  shape_block: $theme.blue{#
+  shape_block: $theme.blue
+  block: $theme.blue{#
+
+  > shape_match_pattern: The matching pattern for each arm in a match expression. Does not include the guard expression (if present).
+  
   in the following code, all the possibilities are match items
   [black red yellow green purple blue indigo] | each {|c|
     match $c {
@@ -351,8 +362,10 @@ $env.config.color_config = {
   #}
   shape_range: $scheme.operator{#
 
-  in the following snippet, `out>` and `err>` are redirection
-  cat unknown.txt out> out.log err> err.log
+  > shape_direction: The redirection symbols such as `o>`, `error>`, `e>|`, etc.
+
+  example:
+    cat unknown.txt out> out.log err> err.log
 
   #}
   shape_redirection: $scheme.operator{#
@@ -382,6 +395,12 @@ $env.config.color_config = {
   #}
   shape_external_resolved: $scheme.recognized_command{#
 
+  `custom` values are not directly used by nushell but *may* be used by plugins
+
+  #}
+  shape_custom: $theme.pink
+  custom: $theme.pink{#
+
   Below highlights are not used.
 
   For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
@@ -389,11 +408,9 @@ $env.config.color_config = {
   But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
 
   #}
-  shape_custom: { fg: "#ff0000" bg: "#ff0000" }
   glob: { fg: "#00ff00" bg: "#00ff00" }
-  shape_literal: { fg: "#ffff00" bg: "#ffff00" }
+  shape_literal: $scheme.constant
   shape_glob_interpolation: { fg: "#ff00ff" bg: "#ff00ff" }
-  block: { fg: "#00ffff" bg: "#00ffff" }
 }{#
 
 This is required to be able to highlight valid commands and use the shape_external_resolved option
