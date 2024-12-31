@@ -63,7 +63,7 @@ source ~/catppuccin_mocha.nu
 ```
 
 > [!TIP]
-> Set `$env.config.highlight_resolved_externals = true` in your config which will highlight invalid commands in red
+> Set `$env.config.highlight_resolved_externals = true` in your config which will highlight valid non-nushell commands (such as [`lazygit`](https://github.com/jesseduffield/lazygit)) in blue.
 
 ## Building the themes
 
