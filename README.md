@@ -62,9 +62,6 @@ or
 source ~/catppuccin_mocha.nu
 ```
 
-> [!TIP]
-> Set `$env.config.highlight_resolved_externals = true` in your config which will highlight valid non-nushell commands (such as [`lazygit`](https://github.com/jesseduffield/lazygit)).
-
 ## Building the themes
 
 Catppuccin for Nushell uses [Whiskers](https://github.com/catppuccin/whiskers).

@@ -400,8 +400,5 @@ This is required to be able to highlight valid commands and use the shape_extern
 
 e.g. `lazygit` is a valid command, but it is external. It will get recognized as a correct command with this config
 
-$env.config.highlight_resolved_externals = true
-
-We don't set it as the default since this theme only sets colors. Nushell maintainers chose to disable it by default since it can affect performance negatively
-
 #}
+$env.config.highlight_resolved_externals = true
