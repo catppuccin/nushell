@@ -40,8 +40,8 @@ let scheme = {
 $env.config.color_config = {
   separator: { fg: $theme.surface2 attr: b }
   leading_trailing_space_bg: { attr: n }
-  header: $theme.text
-  empty: { bg: $theme.green fg: $theme.base }
+  header: { fg: $theme.text attr: b }
+  empty: { attr: n }
   bool: $scheme.constant
   int: $scheme.constant
   filesize: {|fsize|
