@@ -36,6 +36,7 @@ let scheme = {
   string: $theme.green
   virtual_text: $theme.surface2
   variable: { fg: $theme.flamingo attr: i }
+  filepath: $theme.yellow
 }
 
 $env.config.color_config = {
@@ -110,11 +111,11 @@ $env.config.color_config = {
   hints: $scheme.virtual_text
   search_result: { attr: u }
   shape_closure: $theme.teal
-  shape_directory: $theme.blue
+  shape_directory: { fg: $scheme.filepath attr: b }
   shape_externalarg: $theme.text
-  shape_filepath: $theme.blue
+  shape_filepath: $scheme.filepath
   shape_flag: { fg: $theme.maroon attr: i }
-  shape_globpattern: $theme.text
+  shape_globpattern: $scheme.filepath
   shape_int: $scheme.constant
   shape_internalcall: $scheme.recognized_command
   shape_list: $scheme.punctuation

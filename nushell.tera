@@ -28,6 +28,7 @@ We don't want to color it as red for this reason, since it could potentially be 
   string: $theme.green
   virtual_text: $theme.surface2
   variable: { fg: $theme.flamingo attr: i }
+  filepath: $theme.yellow
 }
 
 $env.config.color_config = {
@@ -129,15 +130,15 @@ $env.config.color_config = {
 
   }#}
   shape_closure: $theme.teal
-  shape_directory: $theme.blue
+  shape_directory: { fg: $scheme.filepath attr: b }
   shape_externalarg: $theme.text
-  shape_filepath: $theme.blue
+  shape_filepath: $scheme.filepath
   shape_flag: { fg: $theme.maroon attr: i }{#
 
   for instance, inputs to a command like `ls`. So `ls file1 *.txt`, both args are this
 
   #}
-  shape_globpattern: $theme.text{#
+  shape_globpattern: $scheme.filepath{#
 
   integers such as 1, 4, 15
 
