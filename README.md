@@ -17,10 +17,6 @@
 
 ## Previews
 
-![image](https://github.com/user-attachments/assets/f45f2379-a791-4365-a24c-61ef1611a15c)
-
-When I get the green light from maintainers of catppuccin, I will generate the previews for this theme
-
 <details>
 <summary>🌻 Latte</summary>
 <img src="./assets/latte.webp"/>
