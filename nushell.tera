@@ -34,14 +34,35 @@ We don't want to color it as red for this reason, since it could potentially be 
 $env.config.color_config = {
 {#
 
-  for instance, color of the border of each table
+  > separator: Used for table/list/record borders
 
-  #}  separator: { fg: $theme.surface2 attr: b }
-  leading_trailing_space_bg: { attr: n }
-  header: { fg: $theme.text attr: b }
-  empty: { attr: n }
-  bool: $scheme.constant
+  #}  separator: { fg: $theme.surface2 attr: b }{#
+
+  > leading_trailing_space_bg: When a string value inside structured data has leading or trailing whitespace, that whitespace will be displayed using this style.
+
+  #}
+  leading_trailing_space_bg: { fg: $theme.lavender attr: u }{#
+
+  > header: The column names in a table header
+
+  #}
+  header: { fg: $theme.text attr: b }{#
+
+  > empty: This style is applied to empty/missing values in a table. However, since the ❎ emoji is used for this purpose, there is limited styling that can be applied.
+
+  #}
+  empty: { attr: n }{#
+
+  > bool: true or false
+
+  #}
+  bool: $scheme.constant{#
+
+  Numeric values
+
+  #}
   int: $scheme.constant
+  float: $scheme.constant
   filesize: {||
     if $in < 1kb {
       $theme.teal
@@ -92,11 +113,15 @@ $env.config.color_config = {
     } else {
       $theme.mauve
     }
-  }
+  }{#
+
+  > foreground, background, and cursor: not handled by Nushell, but can be used by custom-commands such as `theme` from the nu_scripts repository. That `theme` command can be used to set the terminal foreground, background, and cursor colors.
+
+  #}
   background: $theme.base
   foreground: $theme.text
+  cursor: { bg: $theme.text fg: $theme.base }
   range: $scheme.operator
-  float: $scheme.constant
   string: $scheme.string
   nothing: $scheme.constant
   binary: $scheme.constant{#
