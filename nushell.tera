@@ -105,12 +105,18 @@ $env.config.color_config = {
   $env.LS_COLORS
 
   #}
-  cell-path: $scheme.punctuation
-  row_index: $theme.subtext1
+  cell-path: $scheme.punctuation{#
+
+  If you put the expression [1,2,3,4,5] into the terminal
+  It will output a formatter array, showing all of its indexes and each element
+  The color of these indexes will have this highlight
+
+  #}
+  row_index: $scheme.virtual_text
   record: $theme.text
   list: $theme.text
   hints: $scheme.virtual_text
-  search_result: { attr: r }{#
+  search_result: { attr: u }{#
 
   in the following code, the closure inside the "list" path `|el|` has this color, as well as the surrounding curly braces
   def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {

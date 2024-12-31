@@ -104,11 +104,11 @@ $env.config.color_config = {
   nothing: $scheme.constant
   binary: $scheme.constant
   cell-path: $scheme.punctuation
-  row_index: $theme.subtext1
+  row_index: $scheme.virtual_text
   record: $theme.text
   list: $theme.text
   hints: $scheme.virtual_text
-  search_result: { attr: r }
+  search_result: { attr: u }
   shape_closure: $theme.teal
   shape_directory: $theme.blue
   shape_externalarg: $theme.text
