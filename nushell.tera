@@ -27,6 +27,7 @@ We don't want to color it as red for this reason, since it could potentially be 
   operator: $theme.sky
   string: $theme.green
   virtual_text: $theme.surface2
+  variable: { fg: $theme.flamingo attr: i }
 }
 
 $env.config.color_config = {
@@ -248,7 +249,7 @@ $env.config.color_config = {
   a variable like $c for example
 
   #}
-  shape_variable: { fg: $theme.peach attr: i }{#
+  shape_variable: $scheme.variable{#
 
   true and false
 
@@ -278,7 +279,7 @@ $env.config.color_config = {
   }
 
   #}
-  shape_vardecl: { fg: $theme.peach attr: i }{#
+  shape_vardecl: $scheme.variable{#
 
   commands which are not a part of nushell, or maybe they're not command at all
   e.g. `l` is not a command, but it gets this color

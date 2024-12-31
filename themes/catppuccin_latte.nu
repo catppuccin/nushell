@@ -35,6 +35,7 @@ let scheme = {
   operator: $theme.sky
   string: $theme.green
   virtual_text: $theme.surface2
+  variable: { fg: $theme.flamingo attr: i }
 }
 
 $env.config.color_config = {
@@ -114,10 +115,10 @@ $env.config.color_config = {
   shape_match_pattern: $theme.green
   shape_operator: $scheme.operator
   shape_table: $scheme.punctuation
-  shape_variable: { fg: $theme.peach attr: i }
+  shape_variable: $scheme.variable
   shape_bool: $scheme.constant
   shape_signature: $theme.teal
-  shape_vardecl: { fg: $theme.peach attr: i }
+  shape_vardecl: $scheme.variable
   shape_external: $scheme.unrecognized_command
   shape_range: $scheme.operator
   shape_redirection: { fg: $theme.text attr: b }
