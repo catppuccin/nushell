@@ -307,7 +307,7 @@ $env.config.color_config = {
   cat unknown.txt out> out.log err> err.log
 
   #}
-  shape_redirection: { fg: $theme.text attr: b }{#
+  shape_redirection: $scheme.operator{#
 
   e.g. 1.41
 

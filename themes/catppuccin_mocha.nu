@@ -121,7 +121,7 @@ $env.config.color_config = {
   shape_vardecl: $scheme.variable
   shape_external: $scheme.unrecognized_command
   shape_range: $scheme.operator
-  shape_redirection: { fg: $theme.text attr: b }
+  shape_redirection: $scheme.operator
   shape_float: $scheme.constant
   shape_binary: $scheme.constant
   shape_datetime: $scheme.constant
