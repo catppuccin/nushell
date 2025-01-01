@@ -130,7 +130,7 @@ $env.config.color_config = {
   shape_operator: $scheme.operator
   shape_redirection: $scheme.operator
   glob: $scheme.filepath
-  shape_directory: { fg: $scheme.filepath attr: b }
+  shape_directory: $scheme.filepath
   shape_filepath: $scheme.filepath
   shape_glob_interpolation: $scheme.filepath
   shape_globpattern: $scheme.filepath
