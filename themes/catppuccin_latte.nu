@@ -47,7 +47,7 @@ $env.config.color_config = {
   record: $theme.text
   list: $theme.text
   hints: $scheme.virtual_text
-  search_result: { fg: $theme.base bg: $theme.blue }
+  search_result: { fg: $theme.base bg: $theme.yellow }
   shape_closure: $theme.teal
   closure: $theme.teal
   shape_flag: { fg: $theme.maroon attr: i }
@@ -123,7 +123,7 @@ $env.config.color_config = {
   custom: $theme.pink
   background: $theme.base
   foreground: $theme.text
-  cursor: { bg: $theme.text fg: $theme.base }
+  cursor: { bg: $theme.rosewater fg: $theme.base }
   shape_range: $scheme.operator
   range: $scheme.operator
   shape_pipe: $scheme.operator
