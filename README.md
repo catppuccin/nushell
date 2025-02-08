@@ -70,7 +70,7 @@ Modify the themes by editing [nushell.tera](./nushell.tera), then run `whiskers 
 
 ## 💝 Thanks to
 
-- [Nikita Revenco](https://github.com/nikitarevenco)
+- [Nik Revenco](https://github.com/nik-rev)
 
 &nbsp;
 
