@@ -30,6 +30,77 @@ let scheme = {
   filepath: $theme.yellow
 }
 
+{#
+The relative brightness of any point in a colorspace, normalized to 0 for darkest black and 1 for lightest white
+-#}
+def relative-luminance [color:string] {
+  let trimmed_hex = ($color | str trim | str upcase | str replace -r '^#' '')
+  let rgb_color = {
+    r: ($trimmed_hex | str substring 0..1 | into int -r 16)
+    g: ($trimmed_hex | str substring 2..3 | into int -r 16)
+    b: ($trimmed_hex | str substring 4..5 | into int -r 16)
+  }
+
+  let RsRGB = $rgb_color.r / 255
+  let GsRGB = $rgb_color.g / 255
+  let BsRGB = $rgb_color.b / 255
+
+  def rgb-to-L [rgb:float] {
+    if $rgb <= 0.04045 {
+      ($rgb / 12.92)
+    } else {
+      ((($rgb + 0.055) / 1.055) ** 2.4)
+    }
+  }
+
+  let R = rgb-to-L $RsRGB
+  let G = rgb-to-L $GsRGB
+  let B = rgb-to-L $BsRGB
+
+  return (0.2126 * $R + 0.7152 * $G + 0.0722 * $B)
+}
+
+{#
+Contrast ratio
+-#}
+def contrast-ratio [Ltxt:float Lbg:float] {
+  return (
+    if $Ltxt > $Lbg {
+      (($Ltxt + 0.05) / ($Lbg + 0.05))
+    } else {
+      (($Lbg + 0.05) / ($Ltxt + 0.05))
+    }
+  )
+}
+
+{#
+Rule used for coloring hex code strings in nushell outputs as the color
+of that hex code. Uses WCAG contrast ratio to change background color
+instead of foreground color if the contrast would be too low.
+-#}
+let hex_string_rule = {||
+  if not ($in =~ '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$') {
+    return $scheme.string
+  } else {
+    # normalize #RGB to #RRGGBB
+    let hex = (if ($in | str length) == 4 {
+      $in | str replace -r '^#(.)(.)(.)$' '#$1$1$2$2$3$3'
+    } else { $in })
+
+    let Ltxt = (relative-luminance $hex)
+    let Lbg = (relative-luminance $theme.base)
+    let L = (contrast-ratio $Ltxt $Lbg)
+
+    return (
+      if $L >= 4.5 {
+        { fg: $hex }
+      } else {
+        { fg: $theme.text, bg: $hex }
+      }
+    )
+  }
+}
+
 $env.config.color_config = {
   {#
   > separator: Used for table/list/record borders
@@ -95,9 +166,9 @@ $env.config.color_config = {
   shape_keyword: $theme.mauve
   {#-
   > shape_match_pattern: The matching pattern for each arm in a match expression. Does not include the guard expression (if present).
-  
+
   in the following code, all the possibilities are match items
-  
+
   [black red yellow green purple blue indigo] | each {|c|
     match $c {
       "black" => "classy"
@@ -153,7 +224,7 @@ $env.config.color_config = {
   Variables
 
   =========================
-  
+
 
   in the following snippet, `fish_completer` declaration gets this highlight
 
@@ -176,7 +247,7 @@ $env.config.color_config = {
   Highlights which change depending on the value
 
   =========================
- 
+
 
   > empty: This style is applied to empty/missing values in a table. However, since the ❎ emoji is used for this purpose, there is limited styling that can be applied.
 
@@ -239,7 +310,7 @@ $env.config.color_config = {
   Commands
 
   =========================
-  
+
 
   commands which are not a part of nushell, or maybe they're not command at all
   e.g. `l` is not a command, but it gets this color
@@ -258,7 +329,7 @@ $env.config.color_config = {
   shape_external: $scheme.unrecognized_command
   {#-
   > shape_internalcall: A known Nushell built-in or custom command in the "command position" (usually the first bare word of an expression).
-  
+
   command that is a binary, e.g. `ls`
 
   "Internal" commands are those defined within nushell which are valid
@@ -316,7 +387,7 @@ $env.config.color_config = {
   Operators
 
   =========================
- 
+
 
   a range like 1..5
   the ".." will be highlighted
@@ -364,7 +435,7 @@ $env.config.color_config = {
   Below highlights are not used.
 
   For example, shape_custom exists but it cannot be declared by the user https://www.nushell.sh/lang-guide/chapters/types/other_types/01_not_declarable.html
-  
+
   But we set it to high visibility colors so it's easy to spot if nushell releases an update where you can create them. Then we can find it and fix it in the themes
 
   #}
@@ -440,7 +511,7 @@ $env.config.color_config = {
 
   =========================
   #}
-  string: $scheme.string
+  string: $hex_string_rule
   {#-
 
   for example: 'hello world'

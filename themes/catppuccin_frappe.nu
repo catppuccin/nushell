@@ -39,6 +39,66 @@ let scheme = {
   filepath: $theme.yellow
 }
 
+def relative-luminance [color:string] {
+  let trimmed_hex = ($color | str trim | str upcase | str replace -r '^#' '')
+  let rgb_color = {
+    r: ($trimmed_hex | str substring 0..1 | into int -r 16)
+    g: ($trimmed_hex | str substring 2..3 | into int -r 16)
+    b: ($trimmed_hex | str substring 4..5 | into int -r 16)
+  }
+
+  let RsRGB = $rgb_color.r / 255
+  let GsRGB = $rgb_color.g / 255
+  let BsRGB = $rgb_color.b / 255
+
+  def rgb-to-L [rgb:float] {
+    if $rgb <= 0.04045 {
+      ($rgb / 12.92)
+    } else {
+      ((($rgb + 0.055) / 1.055) ** 2.4)
+    }
+  }
+
+  let R = rgb-to-L $RsRGB
+  let G = rgb-to-L $GsRGB
+  let B = rgb-to-L $BsRGB
+
+  return (0.2126 * $R + 0.7152 * $G + 0.0722 * $B)
+}
+
+def contrast-ratio [Ltxt:float Lbg:float] {
+  return (
+    if $Ltxt > $Lbg {
+      (($Ltxt + 0.05) / ($Lbg + 0.05))
+    } else {
+      (($Lbg + 0.05) / ($Ltxt + 0.05))
+    }
+  )
+}
+
+let hex_string_rule = {||
+  if not ($in =~ '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$') {
+    return $scheme.string
+  } else {
+    # normalize #RGB to #RRGGBB
+    let hex = (if ($in | str length) == 4 {
+      $in | str replace -r '^#(.)(.)(.)$' '#$1$1$2$2$3$3'
+    } else { $in })
+
+    let Ltxt = (relative-luminance $hex)
+    let Lbg = (relative-luminance $theme.base)
+    let L = (contrast-ratio $Ltxt $Lbg)
+
+    return (
+      if $L >= 4.5 {
+        { fg: $hex }
+      } else {
+        { fg: $theme.text, bg: $hex }
+      }
+    )
+  }
+}
+
 $env.config.color_config = {
   separator: { fg: $theme.surface2 attr: b }
   leading_trailing_space_bg: { fg: $theme.lavender attr: u }
@@ -146,7 +206,7 @@ $env.config.color_config = {
   shape_binary: $scheme.constant
   shape_datetime: $scheme.constant
   shape_literal: $scheme.constant
-  string: $scheme.string
+  string: $hex_string_rule
   shape_string: $scheme.string
   shape_string_interpolation: $theme.flamingo
   shape_raw_string: $scheme.string
