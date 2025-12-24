@@ -97,7 +97,7 @@ $env.config.color_config = {
       $theme.mauve
     }
   }
-  date: {|| (date now) - $in |
+  datetime: {|| (date now) - $in |
     if $in < 1day {
       $theme.teal
     } else if $in < 1wk {
