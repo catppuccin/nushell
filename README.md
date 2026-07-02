@@ -36,31 +36,8 @@
 
 ## Usage
 
-Download the theme file from [the themes directory](./themes) you would like to use to your computer in the home directory, for example.
-
-Then, depending on which theme you would like to use, add the following to your config:
-
-```nu
-source ~/catppuccin_latte.nu
-```
-
-or
-
-```nu
-source ~/catppuccin_frappe.nu
-```
-
-or
-
-```nu
-source ~/catppuccin_macchiato.nu
-```
-
-or
-
-```nu
-source ~/catppuccin_mocha.nu
-```
+1. Download the flavor of your choice from [themes](themes).
+2. Add `source path/to/catppuccin_<flavor>.nu` to your config (replace `path/to` with the actual path to the downloaded file and replace `<flavor>` with the flavor you chose)
 
 ## Building the themes
 
