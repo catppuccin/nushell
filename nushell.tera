@@ -1,13 +1,14 @@
 ---
 whiskers:
-  version: ^2.5.1
+  version: "^2.9.0"
   matrix:
     - flavor
   filename: "themes/catppuccin_{{ flavor.identifier }}.nu"
+  hex_format: "#{{r}}{{g}}{{b}}{{z}}"
 ---
 let theme = {
 {%- for identifier, color in flavor.colors %}
-  {{ identifier }}: "#{{ color.hex }}"
+  {{ identifier }}: "{{ color.hex }}"
 {%-endfor %}
 }
 
